@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TodoApp } from './components/TodoApp';
 import { TodoList } from './components/TodoList';
 import { TodosFilter } from './components/TodosFilter';
 
 function App() {
-  const [currentListToDo, setCurrentListToDo] = useState([]);
+  const initialToDo = JSON.parse(localStorage.getItem('todos'));
+  const [currentListToDo, setCurrentListToDo] = useState(initialToDo);
   const [all, setAll] = useState(false);
   const [active, setActive] = useState(false);
   const [complited, setComplited] = useState(false);
@@ -27,10 +28,14 @@ function App() {
     setCurrentListToDo(allCompleted);
   };
 
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(currentListToDo));
+  }, [currentListToDo]);
+
   return (
     <section className="todoapp">
       <header className="header">
-        <h1>todos</h1>
+        <h1>todo</h1>
         <TodoApp
           setCurrentListToDo={setCurrentListToDo}
           currentListToDo={currentListToDo}
