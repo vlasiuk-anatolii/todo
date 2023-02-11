@@ -11,6 +11,7 @@ export const TodoList = ({
   const [togglerTodo, setTogglerTodo] = useState(false);
   const [isEdit, setIsEdit] = useState(0);
   const [tempTitle, setTempTitle] = useState('');
+  const [currentId, setCurrentId] = useState('');
   let currentList = currentListToDo;
 
   if (active) {
@@ -74,6 +75,11 @@ export const TodoList = ({
     };
   }, [tempTitle]);
 
+  useEffect(() => {
+    togglerIsCompleated(currentId);
+
+  }, [togglerTodo])
+
   return (
     <ul className="todo-list" data-cy="todoList">
       {currentList.map(item => (
@@ -90,8 +96,9 @@ export const TodoList = ({
               checked={item.isCompleated}
               className="toggle"
               onChange={() => {
+                console.log('onchange');
+                setCurrentId(item.id);
                 setTogglerTodo(!togglerTodo);
-                togglerIsCompleated(item.id);
               }}
             />
             <label
