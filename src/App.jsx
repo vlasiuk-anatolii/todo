@@ -5,7 +5,7 @@ import { TodosFilter } from './components/TodosFilter';
 
 function App() {
   const initialToDo = JSON.parse(localStorage.getItem('todos'));
-  const [currentListToDo, setCurrentListToDo] = useState(initialToDo);
+  const [currentListToDo, setCurrentListToDo] = useState(initialToDo || []);
   const [all, setAll] = useState(false);
   const [active, setActive] = useState(false);
   const [complited, setComplited] = useState(false);
