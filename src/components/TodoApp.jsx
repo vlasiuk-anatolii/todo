@@ -4,22 +4,23 @@ export const TodoApp = ({ currentListToDo, setCurrentListToDo }) => {
   const [inputValue, setInputValue] = useState('');
 
   const hendlerForm = () => {
-    const objNewTodo = {
-      title: inputValue,
-      id: +new Date(),
-      isCompleated: false,
-    };
-
-    setInputValue('');
-
-    setCurrentListToDo([...currentListToDo, objNewTodo]);
+    if(inputValue !== '') {
+      const  objNewTodo = {
+        title: inputValue,
+        id: +new Date(),
+        isCompleated: false,
+      };
+      setInputValue('');
+      setCurrentListToDo([...currentListToDo, objNewTodo]);
+    } else {
+      setCurrentListToDo([...currentListToDo]);
+    }
   };
 
   useEffect(() => {
     const keyDownHandler = (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();
-
         hendlerForm();
       }
     };

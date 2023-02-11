@@ -9,7 +9,7 @@ export const TodoList = ({
   setCurrentListToDo,
 }) => {
   const [togglerTodo, setTogglerTodo] = useState(false);
-  const [isedit, setIsEdit] = useState(0);
+  const [isEdit, setIsEdit] = useState(0);
   const [tempTitle, setTempTitle] = useState('');
   let currentList = currentListToDo;
 
@@ -26,7 +26,6 @@ export const TodoList = ({
   const togglerIsCompleated = (id) => {
     currentListToDo.forEach((element) => {
       if (element.id === id) {
-        // eslint-disable-next-line no-param-reassign
         element.isCompleated = togglerTodo;
       }
     });
@@ -51,7 +50,6 @@ export const TodoList = ({
   const editTitle = (id) => {
     currentListToDo.forEach((element) => {
       if (element.id === id) {
-        // eslint-disable-next-line no-param-reassign
         element.title = tempTitle;
       }
     });
@@ -64,13 +62,13 @@ export const TodoList = ({
       if (event.key === 'Enter') {
         event.preventDefault();
         
-        editTitle(isedit);
+        editTitle(isEdit);
         setIsEdit(0);
       }
     };
 
     document.addEventListener('keydown', keyDownHandler);
-
+    console.log(tempTitle); 
     return () => {
       document.removeEventListener('keydown', keyDownHandler);
     };
@@ -83,7 +81,7 @@ export const TodoList = ({
           key={item.id}
           className={classnames({
             completed: item.isCompleated,
-            editing: isedit === item.id,
+            editing: isEdit === item.id,
           })}
         >
           <div className="view">

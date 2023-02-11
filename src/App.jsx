@@ -20,7 +20,6 @@ function App() {
 
   const togglerAll = () => {
     const allCompleted = currentListToDo
-      // eslint-disable-next-line no-return-assign, no-param-reassign
       .map(item => (
         { ...item,
           isCompleated: !(item.isCompleated) }));
